@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link href="css/style.css" rel="stylesheet">
+  <title>Habits</title>
+  <link href="styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Hello, World!</h1>
+  <header class="topbar">
+    <button class="profile" aria-label="Perfil">
+      <span class="level">5</span>
+      <svg class="avatar" viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-3.314 2.686-6 6-6h4c3.314 0 6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </header>
+
+  <main class="centered">
+    <div class="logo-wrap">
+      <div class="logo-mark">✦</div>
+      <h1 class="site-title">habits</h1>
+    </div>
+
+    <section class="input-area">
+      <input id="habit-name" type="text" placeholder="Nuevo hábito">
+      <button id="add-habit-btn" class="btn">Añadir</button>
+    </section>
+
+    <section class="list-area">
+      <ul id="habit-list" class="habit-list">
+        <!-- items se añaden aquí -->
+      </ul>
+    </section>
+
+    <section class="all-habits" id="all-habits">
+      <h2>Todos los hábitos</h2>
+      <p id="all-habits-text">—</p>
+    </section>
+  </main>
+
+  <script>
+    const addBtn = document.getElementById('add-habit-btn');
+    const input = document.getElementById('habit-name');
+    const list = document.getElementById('habit-list');
+    const allText = document.getElementById('all-habits-text');
+    const habits = [];
+
+    addBtn.addEventListener('click', () => {
+      const v = input.value && input.value.trim();
+      if (!v) return;
+      habits.push(v);
+      const li = document.createElement('li');
+      li.textContent = v;
+      list.appendChild(li);
+      allText.textContent = habits.join(', ');
+      input.value = '';
+    });
+
+    // Allow Enter key
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') addBtn.click(); });
+  </script>
 </body>
 
 </html>
